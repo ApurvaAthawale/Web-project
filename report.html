@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insurance Policy Report</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
+</head>
+<body>
+	<h2>Insurance Policy Report</h2>
+	<table id="reportTable" border="1">
+		<thead>
+			<tr>
+				<th>Full Name</th>
+				<!-- Add other table headers for each field -->
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- Data rows will be populated dynamically -->
+		</tbody>
+	</table>
+
+	<button onclick="exportToExcel()">Export to Excel</button>
+
+	<script>
+        
+        var policies = [
+            { fullName: "Apurva Athawale" },
+            { fullName: "Jane Smith" }
+        ];
+
+        function populateReport() {
+            var tbody = document.querySelector('#reportTable tbody');
+            tbody.innerHTML = '';
+            policies.forEach(function(policy) {
+                var row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${policy.fullName}</td>
+                    <!-- Add other table data for each field -->
+                    <td><button onclick="editEntry('${policy.fullName}')">Edit</button></td>
+                    <td><button onclick="deleteEntry('${policy.fullName}')">Delete</button></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function editEntry(fullName) {
+            var newName = prompt("Enter new name:", fullName);
+            if (newName !== null && newName !== "") {
+                policies.forEach(function(policy) {
+                    if (policy.fullName === fullName) {
+                        policy.fullName = newName;
+                    }
+                });
+                populateReport();
+            }
+        }
+
+        
+
+        function deleteEntry(fullName) {
+        	function deleteEntry(fullName, array) {
+        	    
+        	    const index = array.findIndex(entry => entry.fullName === fullName);
+        	    
+        	    
+        	    if (index !== -1) {
+        	        array.splice(index, 1); 
+        	        console.log(`Entry '${fullName}' has been deleted.`);
+        	    } else {
+        	        console.log(`Entry '${fullName}' not found.`);
+        	    }
+        	    
+        	    
+        	    return array;
+        	}
+
+        
+        	const entries = [
+        	    { fullName: "neha shaha", age: 30, email: "neha@example.com" },
+        	    { fullName: "apurva athawale", age: 25, email: "apurva@example.com" }
+        	];
+
+        	
+        	deleteEntry("neha shaha", entries);
+
+        	
+        	console.log(entries);
+
+            policies = policies.filter(function(policy) {
+                return policy.fullName !== fullName;
+            });
+            populateReport();
+        }
+
+        function exportToExcel() {
+            // Implement export to Excel functionality
+            // You can use JavaScript libraries like SheetJS (https://sheetjs.com/) for this purpose
+            alert("Export to Excel functionality not implemented yet!");
+        }
+
+        function exportToExcel() {
+            var wb = XLSX.utils.table_to_book(document.getElementById('reportTable'), {sheet:"Sheet JS"});
+            XLSX.writeFile(wb, 'policy_report.xlsx');
+        }
+        
+       populateReport();
+    </script>
+</body>
+</html>
