@@ -1,4 +1,4 @@
-1. Open index.html:
+1. Open ragistration.html:
 Begin by opening index.html. This file contains the registration form.
 2. Fill out the Registration Form:
 Complete the registration form with the required details.
@@ -16,4 +16,4 @@ After submitting the policy form, proceed to Report.html. This page presents the
 Edit or delete reports as needed.
 8.Export Reports to Excel:
 Implement functionality to export the reports to an Excel sheet, if required.
-9.NOTE: first open the index.html file
+9.NOTE: first open the ragistration.html file
